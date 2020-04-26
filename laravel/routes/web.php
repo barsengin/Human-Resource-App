@@ -45,4 +45,3 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post("/employee/update/{employee_id}", "EmployeeController@update")->name('employee.update');
     Route::get("/employee/destroy/{employee_id}", "EmployeeController@destroy")->name('employee.destroy');
 });
-
