@@ -19,6 +19,7 @@ class createCompanyFormRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     * Firma ekleme ve güncelleme işlemleri için kullanılacak formlardaki alanlar için kurallar belirleniyor
      *
      * @return array
      */
@@ -29,7 +30,10 @@ class createCompanyFormRequest extends FormRequest
         $rules['company_phone'] = ['min:9', 'max:11'];
         return $rules;
     }
-
+    /**
+     * Firma ekleme ve güncelleme işlemlerinde uyarı mesajları için her alanın adı değiştiriliyor
+     * Örneğin company_name alanı giril mediği zaman: rules() fonksiyonu ile zorunlu olduğu belirtilen company_name alanı için eğer messages()fonksiyonumuz tanımlı değilse, Firma Adı bilgisi zorunludur şeklinde bir uyarı gelir
+     */
     public function attributes()
     {
         return [
@@ -38,6 +42,11 @@ class createCompanyFormRequest extends FormRequest
             'company_logo' => "Logo"
         ];
     }
+    /**
+     * rules() fonksiyonundaki her bir kurala göre özel mesaj eklemek için kullanılır
+     * Örneğin company_logo alanı .pdf formatında dosya yüklenmeye çalışıldığı zaman  52.satırdaki özel uyarıyı göstermektedir.
+     * BU fonksiyon yazılmadığı zaman laravel'in default uyarı mesajları verilmektedir.
+     */
     public function messages()
     {
         return [

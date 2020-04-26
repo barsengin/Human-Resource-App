@@ -19,6 +19,7 @@ class createEmployeeFormRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     * createCompanyFormRequest() fonksiyonundaki açıklamalar her bir fonksiyon için takip edilebilir
      *
      * @return array
      */

@@ -11,6 +11,7 @@
                         @endif
                         <div class="x_title">
                             <h2>Personel Detayları</h2>
+                            <a href="{{ route('employee.create') }}" class=" navbar-right panel_toolbox btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Yeni Personel Ekle</a>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -40,7 +41,9 @@
                                     </li>
                                 </ul>
 
-                                <a href="{{ route('employee.edit', ['employee_id' => $employee->id]) }}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Düzenle</a>
+                                <a href="{{ route('employee.edit', ['employee_id' => $employee->id]) }}" class="btn btn-success btn-block"><i class="fa fa-edit m-right-xs"></i>Düzenle</a>
+                                <a href="{{ route('employee.destroy', ['employee_id' => $employee->id]) }}" onclick="return confirm('İlgili personel silinecek. Devam etmek istiyor musunuz?')" class="btn btn-sm btn-danger btn-block"> <i class="fa fa-trash"></i> Sil</a>
+
                                 <br />
 
 

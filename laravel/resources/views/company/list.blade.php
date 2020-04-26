@@ -13,7 +13,7 @@
                             <a href="{{ route('company.create') }}" class=" navbar-right panel_toolbox btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Yeni Firma Ekle</a>
                             <div class="clearfix"></div>
                         </div>
-                        @if ($message = Session::get('success'))
+                        @if ($message = Session::get('info'))
                             <div class="alert alert-success">
                                 <p>{{ $message }}</p>
                             </div>

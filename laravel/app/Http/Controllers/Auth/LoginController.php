@@ -32,7 +32,6 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
      * @return void
      */
     public function __construct()
@@ -40,28 +39,20 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * Create a new controller instance.
+     */
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
+    /**
+     * Çıkış işlemi gerçekleştiriliyor..
+     */
     public function logout(Request $request)
     {
        Auth::logout();
        return redirect(route("login"));
-
-       /* $this->guard()->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        if ($response = $this->loggedOut($request)) {
-            return $response;
-        }
-
-        return $request->wantsJson()
-            ? new Response('', 204)
-            : redirect('/');*/
     }
 }

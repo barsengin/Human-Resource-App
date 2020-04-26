@@ -65,7 +65,7 @@
                                             <td>
                                                 <a href="{{ route('employee.show', ['employee_id' => $employee->id]) }}" class="btn btn-sm btn-primary"> <i class="fa fa-eye"></i> Detay</a>
                                                 <a href="{{ route('employee.edit', ['employee_id' => $employee->id]) }}" class="btn btn-sm btn-warning"> <i class="fa fa-eyedropper"></i> Güncelle</a>
-                                                <a href="{{ route('employee.destroy', ['employee_id' => $employee->id]) }}" class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> Sil</a>
+                                                <a href="{{ route('employee.destroy', ['employee_id' => $employee->id]) }}" onclick="return confirm('İlgili personel silinecek. Devam etmek istiyor musunuz?')" class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> Sil</a>
                                             </td>
                                         </tr>
                                     @endforeach

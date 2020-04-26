@@ -26,10 +26,24 @@ class EmployeeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     */
+    public function deleted_employee ()
+    {
+        $employees["data"] = Employee::onlyTrashed()->get();
+        $employees['deleted'] = "1";
+
+        return view("employee.list", compact("employees"));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * Personel oluşturma form sayfasına(employee/create.blade.php) yönlendirme yapılıyor
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+        //Firma listesi isme göre A-Z'ye sıralanarak form sayfasına gönderiliyor.
         $companies = Company::orderBy('company_name','asc')->pluck('company_name', 'id');
 
         return view('employee.create', compact("companies"));
@@ -37,6 +51,8 @@ class EmployeeController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * Personel oluşturma formundan gelen personel nesnesi oluşturuluyor
+     * use App\Http\Requests\createEmployeeFormRequest namespace'deki form Request  sınıfları kullanılıyor(createEmployeeFormRequest)
      *
      * @return \Illuminate\Http\Response
      */
@@ -50,6 +66,7 @@ class EmployeeController extends Controller
 
     /**
      * Display the specified resource.
+     * İlgili personelin profil sayfasına yönlendirelim($employee_id değişkeni zorunludur)
      *
      * @param  int  $employee_id
      * @return \Illuminate\Http\Response
@@ -57,28 +74,37 @@ class EmployeeController extends Controller
     public function show($employee_id)
     {
         $employee = Employee::find($employee_id);
-        return view('employee.show', ['employee'=>$employee]);
+        if($employee)
+            return view('employee.show', ['employee'=>$employee]);
+        else
+            abort(404);
     }
 
     /**
      * Show the form for editing the specified resource.
+     * Personel düzenleme form sayfasına(employee/update.blade.php) yönlendirme yapılır.
      * @param  int  $employee_id
      * @return \Illuminate\Http\Response
      */
     public function edit($employee_id)
     {
         $employee = Employee::find($employee_id);
+
+        //Firma seçimi için aktif firma listesi getiriliyor ve diziye aktarılıyor.
         $companies = Company::orderBy('company_name','asc')->pluck('company_name', 'id');
 
-        return view('employee.update', [
-            'employee'=>$employee,
-            'companies'=>$companies
-         ]);
+        if($employee)
+            return view('employee.update', [
+                        'employee'=>$employee,
+                        'companies'=>$companies
+                        ]);
+        else
+            abort(404);
     }
 
     /**
      * Update the specified resource in storage.
-     *
+     * Personel düzenleme sayfasından(employee/update.blade.php) gelen form verilerine göre firma bilgfileri güncellenir
      * @param  int  $employee_id
      * @return \Illuminate\Http\Response
      */
@@ -86,6 +112,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($employee_id);
         $employee->fill($request->all());
+
         if($employee->save())
             return redirect()->route('employee.show', ['employee_id'=>$employee->id])
                 ->with( 'info', 'Personel bilgileri güncellendi.');
@@ -93,7 +120,7 @@ class EmployeeController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * Personel silme işlemi gerçekleştiriliyor
      * @param  int  $employee_id
      * @return \Illuminate\Http\Response
      */
@@ -107,13 +134,5 @@ class EmployeeController extends Controller
 
         return redirect()->route('employee.index')
             ->with('success','Hata Oluştu!!');
-    }
-
-    public function deleted_employee ()
-    {
-        $employees["data"] = Employee::onlyTrashed()->get();
-        $employees['deleted'] = "1";
-
-        return view("employee.list", compact("employees"));
     }
 }
