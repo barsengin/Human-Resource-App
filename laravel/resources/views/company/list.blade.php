@@ -29,10 +29,14 @@
                                     <th>Firma Logo</th>
                                     <th>Web Sayfası</th>
                                     <th>Oluşturulma Tarihi</th>
+                                    <th>Oluşturan Kişi</th>
+
                                     @if($companies["deleted"])
                                         <th>Silinme Tarihi</th>
+                                        <th>Silen Kişi</th>
                                     @else
                                         <th>Güncellenme Tarihi</th>
+                                        <th>Güncelleyen Kişi</th>
                                         <th>İşlem</th>
                                     @endif
                                 </tr>
@@ -47,7 +51,9 @@
                                             <td>@if($company->company_logo != null || $company->company_logo != '')<img src="{{asset('storage/app/public').'/'.$company->company_logo}}" width="20" height="20">@endif</td>
                                             <td>{{$company->company_website}}</td>
                                             <td>{{$company->created_at}}</td>
+                                            <td>{{$company->created_username}}</td>
                                             <td>{{$company->deleted_at}}</td>
+                                            <td>{{$company->deleted_username}}</td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -59,7 +65,9 @@
                                             <td>@if($company->company_logo != null || $company->company_logo!= '')<img src="{{asset('storage/app/public').'/'.$company->company_logo}}" width="20" height="20">@endif</td>
                                             <td>{{$company->company_website}}</td>
                                             <td>{{$company->created_at}}</td>
+                                            <td>{{$company->created_username}}</td>
                                             <td>{{$company->updated_at}}</td>
+                                            <td>{{$company->updated_username}}</td>
                                            <!-- <td>{{ count($company->employee)}}</td>-->
                                             <td>
                                                 <a href="{{ route('company.show', ['company_id' => $company->id]) }}" class="btn btn-sm btn-primary"> <i class="fa fa-eye"></i> Detay</a>

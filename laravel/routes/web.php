@@ -16,11 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' =>false]);
 
-
-//Route::get("/register", "CompanyController@index");
-
 Route::get("/login", "Auth\LoginController@showLoginForm")->name("login");
-//Route::get("/home", "Auth\LoginController@showLoginForm");
 Route::post("/login", "Auth\LoginController@login");
 Route::get("/logout", "Auth\LoginController@logout")->name("logout");
 

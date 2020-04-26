@@ -47,6 +47,21 @@
                                     </div>
                                 </div>
 
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_website">Firma Logosu <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="file-field">
+                                            <a class="btn-floating peach-gradient mt-0 float-left">
+                                                {{ Form::file('company_logo_file') }}
+                                            </a>
+                                        </div>
+                                        @error('company_logo_file')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-3">

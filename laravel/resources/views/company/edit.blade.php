@@ -10,9 +10,8 @@
                         </div>
                         <div class="x_content">
 
-                            <form class="form-horizontal form-label-left" action="{{ route('company.update', ['company_id'=>$company->id]) }}" method="post" >
-                                {{csrf_field()}}
-
+                            {{ Form::open(array('route' => array('company.update', $company->id), "class" => 'form-horizontal form-label-left', 'method' => 'post', 'files' => true)) }}
+                            @csrf
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_name">Firma Adı <span class="required">*</span>
                                     </label>
@@ -55,6 +54,21 @@
                                     </label>
                                     <div class="col-md-3 col-sm-6 col-xs-12">
                                         {{ Form::text('company_website', $company->company_website, ['id' => 'company_website', 'class' => 'form-control']) }}
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_website">Firma Logosu <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="file-field">
+                                            <a class="btn-floating peach-gradient mt-0 float-left">
+                                                {{ Form::file('company_logo_file') }}
+                                            </a>
+                                        </div>
+                                        @error('company_logo_file')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 

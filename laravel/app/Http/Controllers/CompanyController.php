@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Http\Requests\createCompanyFormRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
@@ -62,6 +63,7 @@ class CompanyController extends Controller
             $request['company_logo']  = Storage::disk("uploads")->putFile("logo", $request->company_logo_file);
         }
 
+        $request['created_username'] = Auth::user()->name;
         // FormRequest kurallarına uygun ise artık veritabanına kayıt işlemlerini gerçekleştirebiliriz
         $company = Company::create($request->all());
 
@@ -112,15 +114,23 @@ class CompanyController extends Controller
      * @param  int  $company_id
      * @return \Illuminate\Http\Response
      */
-    public function update($company_id, createCompanyFormRequest $request)
+    public function update($company_id, Request $request)
     {
         //firma id ve gelen form verilerinin doğruluğu kontrol edilip güncelleme işlemi tamamlanır
         $company = Company::find($company_id);
-        $company->fill($request->all());
+        if($company) {
 
-       if($company->save())
-            return redirect()->route('company.show', ['company_id'=>$company_id])
-                ->with( 'info', 'Firma bilgileri güncellendi.');
+            if ($request->company_logo_file) {
+                $request['company_logo'] = Storage::disk("uploads")->putFile("logo", $request->company_logo_file);
+            }
+            $request['updated_username'] = Auth::user()->name;
+            $company->fill($request->all());
+
+            if ($company->save())
+                return redirect()->route('company.show', ['company_id' => $company_id])
+                    ->with('info', 'Firma bilgileri güncellendi.');
+        }  else
+            abort(404);
     }
     /**
      * Remove the specified resource from storage.
@@ -133,12 +143,21 @@ class CompanyController extends Controller
 
         $company = Company::find($company_id);
 
-        $info['succes'] =  $company->company_name.' id numaralı firma başarılı bir şekilde silindi.';
-        $info['error'] =  $company->company_name.' id numaralı firma silinemedi.';
+        if ($company) {
 
-        if($company->delete())
-            return redirect()->route('company.index')->with('info', $info['succes']);
+            $company['deleted_username'] = Auth::user()->name;
 
-        return redirect()->route('company.index')->with('info', info['error']);
+            $company->fill($company->toArray());
+            $company->save();
+
+            $info['success'] =  $company->id.' id numaralı '.$company->company_name.'  başarılı bir şekilde silindi.';
+            $info['error'] =  $company->id.' id numaralı '.$company->company_name.' silinemedi.';
+
+            if($company->delete())
+                return redirect()->route('company.index')->with('info', $info['success']);
+
+            return redirect()->route('company.index')->with('info', info['error']);
+        }  else
+            abort(404);
     }
 }

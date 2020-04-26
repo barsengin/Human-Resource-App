@@ -46,7 +46,7 @@
                                     @enderror
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="employee_email">Email <span class="required">*</span>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="employee_email">Email
                                     </label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
                                         {{ Form::email($name = 'employee_email', $value = "", $attributes = ['id' => 'employee_email', 'class' => 'form-control has-feedback-left']) }}
@@ -56,7 +56,7 @@
 
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Firma </label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Firma</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
                                         {{ Form::select('company_id', $companies, null, ['class' => 'form-control', 'placeholder'=>'Firma Seçiniz']) }}
                                     </div>

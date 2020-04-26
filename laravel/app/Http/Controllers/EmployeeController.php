@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Http\Requests\createEmployeeFormRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -58,10 +59,13 @@ class EmployeeController extends Controller
      */
     public function store(createEmployeeFormRequest $request)
     {
+        $request['created_username'] = Auth::user()->name;
         $employee = Employee::create($request->all());
+
         if($employee)
+
             return redirect()->route('employee.show', ['employee_id'=>$employee->id])
-                ->with( 'info', 'Personel bilgileri güncellendi.');
+                ->with('info', 'Yeni Personel Eklendi.');
     }
 
     /**
@@ -111,11 +115,17 @@ class EmployeeController extends Controller
     public function update($employee_id, createEmployeeFormRequest $request)
     {
         $employee = Employee::find($employee_id);
-        $employee->fill($request->all());
 
-        if($employee->save())
-            return redirect()->route('employee.show', ['employee_id'=>$employee->id])
-                ->with( 'info', 'Personel bilgileri güncellendi.');
+        if($employee){
+            $request['updated_username'] = Auth::user()->name;
+            $employee->fill($request->all());
+
+            if($employee->save())
+                return redirect()->route('employee.show', ['employee_id'=>$employee->id])
+                    ->with( 'info', 'Personel bilgileri güncellendi.');
+        }else
+            abort(404);
+
     }
 
     /**
@@ -126,13 +136,21 @@ class EmployeeController extends Controller
      */
     public function destroy($employee_id)
     {
-        $employee = Employee::find($employee_id)->delete();
+        $employee = Employee::find($employee_id);
 
-        if($employee)
-            return redirect()->route('employee.index')
-                ->with('success','Personel Silindi');
+        if ($employee) {
 
-        return redirect()->route('employee.index')
-            ->with('success','Hata Oluştu!!');
+            $employee['deleted_username'] = Auth::user()->name;
+            $employee->fill($employee->toArray());
+            $employee->save();
+
+            $info['success'] =  $employee->id.' id numaralı '.$employee->employe_first_name.' '.$employee->employe_last_name.'  başarılı bir şekilde silindi.';
+            $info['error'] =  $employee->id.' id numaralı '.$employee->employe_first_name.' '.$employee->employe_last_name.' silinemedi.';
+            if($employee->delete())
+                return redirect()->route('employee.index')->with('info', info['success']);
+
+            return redirect()->route('employee.index')->with('info', info['error']);
+        } else
+            abort(404);
     }
 }

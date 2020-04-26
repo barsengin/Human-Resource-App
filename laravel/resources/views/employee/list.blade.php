@@ -27,14 +27,14 @@
                                     <th>Email</th>
                                     <th>Firma</th>
                                     <th>Oluşturulma Tarihi</th>
+                                    <th>Oluşturan Kişi</th>
 
                                     @if($employees["deleted"])
-                                      <th>Silinme Tarihi</th>
-                                    @endif
-
-                                    <th>Oluşturan Kişi</th>
-                                    @if(!$employees["deleted"])
+                                        <th>Silinme Tarihi</th>
+                                        <th>Silen Kişi</th>
+                                    @else
                                         <th>Güncellenme Tarihi</th>
+                                        <th>Güncelleyen Kişi</th>
                                         <th>İşlem</th>
                                     @endif
                                 </tr>
@@ -48,8 +48,9 @@
                                             <td>{{$employee->employee_email}}</td>
                                             <td>{{$employee->company->company_name}}</td>
                                             <td>{{$employee->created_at}}</td>
+                                            <td>{{$employee->created_username}}</td>
                                             <td>{{$employee->deleted_at}}</td>
-                                            <td>Deneme</td>
+                                            <td>{{$employee->deleted_username}}</td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -60,8 +61,9 @@
                                             <td>{{$employee->employee_email}}</td>
                                             <td>{{$employee->company->company_name}}</td>
                                             <td>{{$employee->created_at}}</td>
-                                            <td>Deneme</td>
+                                            <td>{{$employee->created_username}}</td>
                                             <td>{{$employee->updated_at}}</td>
+                                            <td>{{$employee->updated_username}}</td>
                                             <td>
                                                 <a href="{{ route('employee.show', ['employee_id' => $employee->id]) }}" class="btn btn-sm btn-primary"> <i class="fa fa-eye"></i> Detay</a>
                                                 <a href="{{ route('employee.edit', ['employee_id' => $employee->id]) }}" class="btn btn-sm btn-warning"> <i class="fa fa-eyedropper"></i> Güncelle</a>

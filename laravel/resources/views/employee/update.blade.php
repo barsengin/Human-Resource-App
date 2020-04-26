@@ -14,7 +14,7 @@
                                     <p class="alert alert-danger">{{$error}}</p>
                                 @endforeach
                             @endif
-                                {{ Form::open(array('route' => array('employee.update', $employee), "class" => 'form-horizontal form-label-left', 'method' => 'post')) }}
+                                {{ Form::open(array('route' => array('employee.update', $employee->id), "class" => 'form-horizontal form-label-left', 'method' => 'post')) }}
                                 @csrf
 
                                 <div class="item form-group">

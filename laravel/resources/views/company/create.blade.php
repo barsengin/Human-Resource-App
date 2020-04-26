@@ -29,7 +29,7 @@
                                         @enderror
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_phone">Telefon Numarası <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_phone">Telefon Numarası
                                         </label>
                                         <div class="col-md-3 col-sm-6 col-xs-12 form-group ">
                                             {{ Form::text($name = 'company_phone', $value = "", $attributes = ['id' => 'company_phone', 'class' => 'form-control has-feedback-left']) }}
@@ -40,7 +40,7 @@
                                         @enderror
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_email">Email <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_email">Email
                                         </label>
                                         <div class="col-md-3 col-sm-6 col-xs-12 form-group">
                                             {{ Form::email($name = 'company_email', $value = "", $attributes = ['id' => 'company_email', 'class' => 'form-control has-feedback-left']) }}
@@ -48,14 +48,14 @@
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_address">Firma Adresi <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_address">Firma Adresi
                                         </label>
                                         <div class="col-md-3 col-sm-6 col-xs-12">
                                             {{ Form::textarea($name = 'company_address', $value = "", $attributes = ['id' => 'company_address', 'class' => 'form-control']) }}
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_website">Web Adresi <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_website">Web Adresi
                                         </label>
                                         <div class="col-md-3 col-sm-6 col-xs-12">
                                             {{ Form::text($name = 'company_website', $value = "", $attributes = ['id' => 'company_website', 'class' => 'form-control']) }}
@@ -63,7 +63,7 @@
                                     </div>
 
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_website">Firma Logosu <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_website">Firma Logosu
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="file-field">

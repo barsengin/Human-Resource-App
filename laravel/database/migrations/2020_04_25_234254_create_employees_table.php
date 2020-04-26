@@ -21,6 +21,9 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_phone');
             $table->integer('company_id')->unsigned()->nullable();;
             $table->foreign('company_id')->nullable()->references('id')->on('companies');
+            $table->string('created_username')->nullable();
+            $table->string('updated_username')->nullable();
+            $table->string('deleted_username')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

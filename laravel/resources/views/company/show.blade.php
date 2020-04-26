@@ -9,9 +9,12 @@
                                 <p>{{ $message }}</p>
                             </div>
                         @endif
-                        <div class="x_title">
+                        <div class="x_title ">
                             <h2>Firma Detayları</h2>
-                            <a href="{{ route('company.create') }}" class=" navbar-right panel_toolbox btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Yeni Firma Ekle</a>
+                            <nav class="navbar-right">
+                                <a href="{{ route('company.index') }}" class="btn btn-sm btn-primary"><i class="fa fa-list"></i> Firma Listesi</a>
+                                <a href="{{ route('company.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Yeni Firma Ekle</a>
+                            </nav>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -42,7 +45,7 @@
                                     </li>
                                 </ul>
 
-                                <a href="{{ route('company.edit', ['company_id' => $company->id]) }}" class="btn btn-success  btn-block"><i class="fa fa-edit m-right-xs"></i>Düzenle</a>
+                                <a href="{{ route('company.edit', ['company_id' => $company->id]) }}" class="btn btn-warning btn-block"><i class="fa fa-edit m-right-xs"></i>Düzenle</a>
                                 <a href="{{ route('company.destroy', ['company_id' => $company->id]) }}" onclick="return confirm('İlgili firma silinecek. Devam etmek istiyor musunuz?')" class="btn btn-sm btn-danger btn-block delete-confirm">
                                     <i class="fa fa-trash"></i> Sil
                                 </a>

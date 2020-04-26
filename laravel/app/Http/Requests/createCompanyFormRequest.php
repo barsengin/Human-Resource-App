@@ -50,7 +50,7 @@ class createCompanyFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'company_logo.image'=>'Firma Logosu .png .jpg .jpeg uzentılı dosya olmalıdır',
+            'company_logo_file.image'=>'Firma Logosu .png .jpg .jpeg uzentılı dosya olmalıdır',
             'company_name.required'=>'Firma Adı zorunludur',
             'company_phone.min'=>'Firma Telefonu 10 haneli olmalıdır',
             'company_phone.max'=>'Firma Telefonu 10 haneli olmalıdır'
