@@ -28,6 +28,7 @@ class createCompanyFormRequest extends FormRequest
         $rules['company_name'] = ['required'];
         $rules['company_logo_file'] = ['image','dimensions:min_height=100, min_width=100'];
         $rules['company_phone'] = ['min:9', 'max:11'];
+
         return $rules;
     }
     /**

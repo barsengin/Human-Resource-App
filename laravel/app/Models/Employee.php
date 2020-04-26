@@ -14,7 +14,7 @@ class Employee extends Model
     // deleted_at alanı aktif edilir. Laravel silme işlemi için deleted_at alanına ilgilkil tarihi ekler böylelikle silme işlemi gerçekleştirilmiş olur.(Tablodan silme işlemi yapılmaz sadece pasife alınmış olur)
     use SoftDeletes;
 
-    //company tablosu ile ilişki tanımlaması yapılıyor: company.id = employee.company_id
+    //Company tablosu ile ilişki tanımlaması yapılıyor: company.id = employee.company_id
     public function company()
     {
         return $this->belongsTo(Company::class,'company_id','id')->withTrashed();

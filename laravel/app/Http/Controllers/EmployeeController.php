@@ -87,6 +87,7 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      * Personel düzenleme form sayfasına(employee/update.blade.php) yönlendirme yapılır.
+     *
      * @param  int  $employee_id
      * @return \Illuminate\Http\Response
      */

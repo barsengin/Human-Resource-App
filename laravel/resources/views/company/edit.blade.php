@@ -72,8 +72,6 @@
                                     </div>
                                 </div>
 
-
-
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-3 col-md-offset-3">

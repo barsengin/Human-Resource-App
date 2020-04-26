@@ -53,7 +53,6 @@ class CompanyController extends Controller
      * Firma oluşturma formundan gelen firma nesnesi oluşturuluyor
      * use App\Http\Requests\createCompanyFormRequest namespace'deki form Request  sınıfları kullanılıyor(createCompanyFormRequest)
      *
-     *
      * @return \Illuminate\Http\Response
      */
     public function store(createCompanyFormRequest $request)
