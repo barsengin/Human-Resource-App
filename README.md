@@ -3,10 +3,19 @@
 
 Hakkında
 -----
+Şirket ve çalışanlarının yönetimini sağlayan insan kaynakları uygulaması. 
 
-Şirket ve çalışanlarının yönetimi sağlayan insan kaynakları uygulaması
 
-Uygulam Php PHP => 7.4.3, Laravel => 7.6.2 kullanılarak geliştitildi
+Ugulama geliştirilirken kullanılan teknolojiler:
+---
+
+```bash
+PHP (7.4.3)
+Laravel (7.6.2)
+Bootstrap
+PhpStorm (2019.3)
+Mysql
+```
 
 Kurulumlar
 -------
@@ -21,7 +30,7 @@ Composer kurulumu gerçekleştirilmelidir. Detaylı bilgi için (https://laravel
 composer install
 ```
 #### Düzenlemeler
-Ana dizinde bulunan `storage` ve `bootstrap/cache` klasörlerinin yazma izni kontrolü yapılmadır, yazma izni yoksa yazma izni verilmelidir. <br>
+Ana dizinde bulunan `storage` ve `bootstrap/cache` klasörlerinin yazma izni kontrolü yapılmadır, yazma izni yoksa yazma izni verilmelidir.
 
 ```bash
 php artisan key:generate
@@ -70,6 +79,7 @@ Projede yer alana migration dosyalarındaki veritabanı tablolarının oluşturu
 php artisan migrate --seed
 ```
 komutu kullanılır. Bu komut ile, migration kullanılarak oluşturulan tablolar veri tabanına dahil edilir. 
+`--seed` ifadesi için lütfen Seeder Kullanımı bölümünü inceleyiniz.
 ```bash
 php artisan migrate
 ```
@@ -210,7 +220,7 @@ komutu ile değişiklikler tablolara kaydedilebilir
 #### Controller
 
 Controller hakkında detaylı bilgi için (https://laravel.com/docs/controllers)
-model oluştururken ilgili controller da oluştuğu için default olarak index, create, update, edit, destroy, show, store fonksiyonları gelir. Olmaması durumunda manuel de eklenebilir. Aşağıda örnek olarak CompanyController gösterilmiştir. EmployeeController da benzer şekillde oluşmaktadır.
+model oluştururken ilgili controller da oluştuğu için default olarak index, create, update, edit, destroy, show, store fonksiyonları gelir. Olmaması durumunda manuel de eklenebilir. Aşağıda örnek olarak CompanyController gösterilmiştir. EmployeeController da benzer şekilde oluşmaktadır.
 
 `CompanyController.php`
 ```bash
@@ -374,6 +384,9 @@ php artisan make:request createCompanyFormRequest
 komutu ile  `createCompanyFormRequest` tanumlanır. Aynı işlem EmployeController için de gerçekleştirilebilir. 
 
 `createCompanyFormRequest.php`
+
+![Firma Ekleme Formu](images/company_create.PNG)
+
 ```bash
 <?php
 
@@ -435,6 +448,7 @@ class createCompanyFormRequest extends FormRequest
     }
 }
 ```
+`create.blade.php`
 ```bash
 @extends("layouts.layout")
 
@@ -535,16 +549,16 @@ class createCompanyFormRequest extends FormRequest
     <link href="{{asset("assets/js/validator.js")}}" rel="stylesheet">
 @endsection()
 ```
-yukarıda  firma ekleme form blade.php dosyası ve  form alanlarının kontrolünün sağlandığı createCompanyFormRequest.php dosyası örneği incelebilir.
+yukarıda  firma ekleme form `create.blade.php` dosyası ve  form alanlarının kontrolünün sağlandığı `createCompanyFormRequest.php` dosyası örneği incelebilir.
 
-#### Seed Kullanımı
-Uygulama ilk açıldıuğında  default olarak login işlemi yapabilecek kullanıcı tanımlaması  yapmak amacıyla kullanılmaktadır.
+#### Seeder Kullanımı
+Uygulama ilk açıldığında  default olarak login işlemi yapabilecek kullanıcı tanımlaması yapmak amacıyla kullanılmaktadır.
 Seed hakkında detaylı bilgi için (https://laravel.com/docs/seeding) kontrol edilmelidir.
 ```bash
 php artisan make:seeder UserSeeder
 php artisan db:seed
 ```
-komutları ile app\laravel\databaseUserSeeder.php oluşturulu ve ardından aşlağıdaki gibi düzenlemeler gerçekleştitilebilir
+komutları ile app\laravel\databaseUserSeeder.php oluşturulur ve ardından aşağıdaki gibi düzenlemeler gerçekleştirilebilir.
 ```bash
 <?php
 
@@ -571,7 +585,8 @@ class UserSeeder extends Seeder
 ```bash
 php artisan migrate:refresh --seed
 ```
-komutu ile veritabanında `users` tablosunda yukarıdaki `run()` fonksiyonundaki bilgileri doğrultusunda bir kullanıcı oluşturulmuş olur.
+komutu ile veritabanında `users` tablosunda, `run()` fonksiyonundaki bilgiler doğrultusunda bir kullanıcı oluşturulmuş olur.
+
 #### Route Kullanımı
 Route hakkında detaylı bilgi için (https://laravel.com/docs/routing) kontrol edilmelidir. 
 `web.php`
@@ -629,8 +644,8 @@ Doha sonra `web.php` dosyasında
 ```bash
 Auth::routes(['register' =>false]);
 ```
-komutu ile register methodu iptal edilir. Yani siteme yeni kayıt oluşturma işlemleri engellenmiş olur.
-Ardından uygulamaya erişim işlemleri için kullanıcı girişi zorunluluğu için `web.php` sayfasına 
+komutu ile register metodu iptal edilir. Yani siteme yeni kayıt oluşturma işlemleri engellenmiş olur.
+Ardından uygulamaya erişim kısıtlaması kapsamında kullanıcı girişi zorunluluğu için `web.php` sayfasına 
 ```bash
 Route::group(['middleware' => ['auth']], function() {
 ```
@@ -676,7 +691,7 @@ ardından `filesystem.php` dosyası aşağıdaki gibi düzenlenmelidir.
         ],
     ],
 ```
-ardından `CompanyController` da firma oluştururken aşağıdaki gibi uploads ile belirtilen dosya yoluna ilgili dosya kaydedilir ve veritabanındaki logo alanına oluşturduğumuz `Storage` nesnesi kullanılarak bu dosya yolu kaydedilir.
+ardından `CompanyController` da firma oluştururken aşağıdaki gibi `uploads` ile belirtilen dosya yoluna ilgili dosya kaydedilir ve veritabanındaki logo alanına oluşturduğumuz `Storage` nesnesi kullanılarak bu dosya yolu kaydedilir.
 ```bash
     public function store(createCompanyFormRequest $request)
     {
