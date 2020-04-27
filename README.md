@@ -11,6 +11,8 @@ Hakkında
 
 ![Firma Özet Formu](images/company_show.PNG)
 
+![Firma Özet Formu](images/company_show_2.PNG)
+
 ![Personel Ekleme Formu](images/employee_create.PNG)
 
 Ugulama geliştirilirken kullanılan teknolojiler:
