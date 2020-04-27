@@ -5,9 +5,21 @@ Hakkında
 -----
 Şirket ve çalışanlarının yönetimini sağlayan insan kaynakları uygulaması. 
 
+#### Uygulama ekran görünümleri
+
+![Firma Listeleme](images/companies.png)
+
+![Firma Özet Sayfası](images/company_show.PNG)
+
+![Firma Özet Sayfası](images/company_show_2.PNG)
+
+![Personel Ekleme Formu](images/employee_create.PNG)
+
+![Personel Düzenleme Sayfası](images/employee_show.PNG)
 
 Ugulama geliştirilirken kullanılan teknolojiler:
 ---
+______
 
 ```bash
 PHP (7.4.3)
