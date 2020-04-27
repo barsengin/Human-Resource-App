@@ -9,13 +9,9 @@ Hakkında
 
 ![Firma Listeleme](images/companies.png)
 
-![Firma Özet Sayfası](images/company_show.PNG)
-
-![Firma Özet Sayfası](images/company_show_2.PNG)
+![Firma Özet Formu](images/company_show.PNG)
 
 ![Personel Ekleme Formu](images/employee_create.PNG)
-
-![Personel Düzenleme Sayfası](images/employee_show.PNG)
 
 Ugulama geliştirilirken kullanılan teknolojiler:
 ---
